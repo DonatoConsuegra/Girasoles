@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Girasoles</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #1a1a1a;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.3);
+            margin-bottom: -28px;
+            text-align: center;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        .title1 {
+            font-size: 2.1rem;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.3);
+            margin-bottom: -38px;
+            text-align: center;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.3); }
+            to { text-shadow: 2px 2px 20px rgba(255, 215, 0, 0.8); }
+        }
+
+        .bouquet {
+            position: relative;
+            width: 340px;
+            height: 400px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sunflower {
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+        }
+
+        .sunflower:hover {
+            transform: scale(1.1);
+            z-index: 10;
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6));
+        }
+
+        .flower-head {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            animation: gentleSway 6s ease-in-out infinite;
+        }
+
+        @keyframes gentleSway {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        .petals {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .petal {
+            position: absolute;
+            width: 25px;
+            height: 50px;
+            background: linear-gradient(45deg, #FFD700 10%, #FFA500 30%, #FF8C00 60%, #B8860B 90%);
+            border-radius: 60% 40% 60% 40%;
+            transform-origin: 50% 85%;
+            box-shadow: 
+                inset 2px 2px 5px rgba(255, 255, 255, 0.3),
+                inset -2px -2px 5px rgba(0, 0, 0, 0.2),
+                0 2px 8px rgba(0, 0, 0, 0.3);
+            filter: 
+                drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3))
+                drop-shadow(-1px -1px 2px rgba(255, 255, 255, 0.1));
+        }
+
+        .petal::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            width: 1px;
+            height: 30px;
+            background: linear-gradient(to bottom, rgba(139, 69, 19, 0.3), transparent);
+            transform: translateX(-50%);
+        }
+
+        .center {
+            position: absolute;
+            top: 34%;
+            left: 10%;
+            transform: translate(-50%, -50%);
+            width: 45px;
+            height: 45px;
+            background: 
+                radial-gradient(circle at 35% 35%, #8B4513 0%, #654321 40%, #2F1B0C 100%);
+            border-radius: 50%;
+            z-index: 5;
+            box-shadow: 
+                inset 0 0 10px rgba(0, 0, 0, 0.5),
+                0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .center::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 35px;
+            height: 35px;
+            background: 
+                repeating-radial-gradient(
+                    circle at center,
+                    #654321 0px 2px,
+                    #8B4513 2px 4px,
+                    #654321 4px 6px,
+                    #2F1B0C 6px 8px
+                );
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+
+        .center::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 25px;
+            height: 25px;
+            background: 
+                radial-gradient(circle at 40% 40%, #8B4513 0%, #654321 50%, #2F1B0C 100%);
+            border-radius: 50%;
+            opacity: 0.9;
+        }
+
+        /* Posicionamiento artístico de los girasoles */
+        .sunflower1 { 
+            top: 80px; 
+            left: 50px; 
+            transform: rotate(-25deg) scale(0.9);
+            z-index: 3;
+        }
+        
+        .sunflower2 { 
+            top: 110px; 
+            left: 170px; 
+            transform: rotate(10deg) scale(1.1);
+            z-index: 5;
+        }
+        
+        .sunflower3 { 
+            top: 150px; 
+            left: 260px; 
+            transform: rotate(-15deg) scale(0.85);
+            z-index: 2;
+        }
+        
+        .sunflower4 { 
+            top: 20px; 
+            left: 200px; 
+            transform: rotate(35deg) scale(1.05);
+            z-index: 4;
+        }
+        
+        .sunflower5 { 
+            top: 200px; 
+            left: 120px; 
+            transform: rotate(-5deg) scale(0.95);
+            z-index: 1;
+        }
+
+        .controls {
+            margin-top: -15px;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            border: none;
+            border-radius: 30px;
+            color: #2F1B0C;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 
+                0 6px 20px rgba(255, 215, 0, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 8px 25px rgba(255, 215, 0, 0.5),
+                inset 0 2px 4px rgba(255, 255, 255, 0.4);
+            background: linear-gradient(45deg, #FFA500, #FFD700);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .message {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            font-size: 1.3rem;
+            color: #FFD700;
+            text-align: center;
+            min-height: 60px;
+            box-shadow: 
+                0 4px 15px rgba(255, 215, 0, 0.2),
+                inset 0 1px 3px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animación de pétalos cayendo mejorada */
+        .falling-petal {
+            position: absolute;
+            width: 18px;
+            height: 30px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            border-radius: 60% 40% 60% 40%;
+            animation: fall 4s linear infinite;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Efectos de partículas */
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #FFD700;
+            border-radius: 50%;
+            animation: sparkle 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 0; 
+                transform: scale(0);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🌻Girasoles para May💗🌻</h1>
+        <h1 class="title1"> De su Moreno🤎🤎🤎🤎</h1>
+        
+
+        <div class="bouquet">
+            <div class="sunflower sunflower1" onclick="animateFlower(this)">
+                <div class="flower-head">
+                    <div class="petals">
+                        <div class="petal" style="transform: rotate(0deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(24deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(48deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(72deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(96deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(120deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(144deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(168deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(192deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(216deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(240deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(264deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(288deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(312deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(336deg) translateY(-35px);"></div>
+                    </div>
+                    <div class="center"></div>
+                </div>
+            </div>
+
+            <div class="sunflower sunflower2" onclick="animateFlower(this)">
+                <div class="flower-head">
+                    <div class="petals">
+                        <div class="petal" style="transform: rotate(0deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(24deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(48deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(72deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(96deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(120deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(144deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(168deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(192deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(216deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(240deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(264deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(288deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(312deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(336deg) translateY(-35px);"></div>
+                    </div>
+                    <div class="center"></div>
+                </div>
+            </div>
+
+            <div class="sunflower sunflower3" onclick="animateFlower(this)">
+                <div class="flower-head">
+                    <div class="petals">
+                        <div class="petal" style="transform: rotate(0deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(24deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(48deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(72deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(96deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(120deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(144deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(168deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(192deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(216deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(240deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(264deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(288deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(312deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(336deg) translateY(-35px);"></div>
+                    </div>
+                    <div class="center"></div>
+                </div>
+            </div>
+
+            <div class="sunflower sunflower4" onclick="animateFlower(this)">
+                <div class="flower-head">
+                    <div class="petals">
+                        <div class="petal" style="transform: rotate(0deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(24deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(48deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(72deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(96deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(120deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(144deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(168deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(192deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(216deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(240deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(264deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(288deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(312deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(336deg) translateY(-35px);"></div>
+                    </div>
+                    <div class="center"></div>
+                </div>
+            </div>
+
+            <div class="sunflower sunflower5" onclick="animateFlower(this)">
+                <div class="flower-head">
+                    <div class="petals">
+                        <div class="petal" style="transform: rotate(0deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(24deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(48deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(72deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(96deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(120deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(144deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(168deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(192deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(216deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(240deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(264deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(288deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(312deg) translateY(-35px);"></div>
+                        <div class="petal" style="transform: rotate(336deg) translateY(-35px);"></div>
+                    </div>
+                    <div class="center"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="createPetals()">🌸 Lluvia de Pétalos</button>
+            <button class="btn" onclick="showMessage()">💌 Mensaje</button>
+        </div>
+
+        <div class="message hidden" id="messageBox">
+            ¡Haz clic en los girasoles para verlos brillar! 🌻✨
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            "¡Haz clic en los girasoles para verlos brillar! 🌻✨",
+            "Los girasoles siempre ven hacia el sol, como yo siempre la veo a usted🤎✨",
+            "Cada pétalo guarda un deseo🌻 que quiero cumplir junto a usted🤎",
+            "La amo mucho mi morena🤎",
+        ];
+
+        function animateFlower(flower) {
+            // Crear partículas brillantes
+            createSparkles(flower);
+            
+            // Animación de pulso
+            flower.style.animation = 'none';
+            flower.offsetHeight;
+            flower.style.animation = 'gentleSway 0.6s ease-in-out 3';
+            
+            // Efecto de brillo
+            flower.style.filter = 'drop-shadow(0 0 40px rgba(255, 215, 0, 0.8))';
+            
+            setTimeout(() => {
+                flower.style.filter = 'drop-shadow(0 0 20px rgba(255, 215, 0, 0.3))';
+            }, 1800);
+        }
+
+        function createSparkles(flower) {
+            const rect = flower.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = (centerX + Math.random() * 100 - 50) + 'px';
+                    particle.style.top = (centerY + Math.random() * 100 - 50) + 'px';
+                    particle.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 2000);
+                }, i * 100);
+            }
+        }
+
+        function createPetals() {
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'falling-petal';
+                    petal.style.left = Math.random() * 100 + '%';
+                    petal.style.animationDelay = Math.random() * 2 + 's';
+                    petal.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    
+                    // Variaciones de color
+                    const colors = [
+                        'linear-gradient(45deg, #FFD700, #FFA500)',
+                        'linear-gradient(45deg, #FFA500, #FF8C00)',
+                        'linear-gradient(45deg, #FFFF00, #FFD700)',
+                        'linear-gradient(45deg, #F0E68C, #DAA520)'
+                    ];
+                    petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    document.body.appendChild(petal);
+                    
+                    setTimeout(() => {
+                        petal.remove();
+                    }, 6000);
+                }, i * 80);
+            }
+        }
+
+        function showMessage() {
+            const messageBox = document.getElementById('messageBox');
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            
+            messageBox.textContent = randomMessage;
+            messageBox.classList.remove('hidden');
+            messageBox.classList.add('show');
+            
+            setTimeout(() => {
+                messageBox.classList.remove('show');
+                messageBox.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Efecto de entrada suave
+        window.addEventListener('load', () => {
+            const flowers = document.querySelectorAll('.sunflower');
+            flowers.forEach((flower, index) => {
+                flower.style.opacity = '0';
+                flower.style.transform += ' translateY(50px)';
+                flower.style.transition = 'all 1s ease-out';
+                
+                setTimeout(() => {
+                    flower.style.opacity = '1';
+                    flower.style.transform = flower.style.transform.replace(' translateY(50px)', '');
+                }, index * 300);
+            });
+        });
+
+        // Efecto de partículas automáticas ocasionales
+        setInterval(() => {
+            if (Math.random() < 0.3) {
+                const flowers = document.querySelectorAll('.sunflower');
+                const randomFlower = flowers[Math.floor(Math.random() * flowers.length)];
+                createSparkles(randomFlower);
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
